@@ -1,5 +1,8 @@
 version: '3.7'
 
+include:
+  - compose-files/auth-api.yaml
+
 services:
   gateway:
     image: nginx:1.27.2-alpine
@@ -9,3 +12,10 @@ services:
       - ./auth-setup-http.conf:/etc/nginx/auth-setup-http.conf:ro
     ports:
       - "8081:80"
+    networks:
+      - pokedex-gamba-net
+    depends_on:
+      - auth-api
+
+networks:
+  pokedex-gamba-net:

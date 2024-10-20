@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  auth-api:
+    image: ghcr.io/pokedex-gamba/auth-api:latest-x86_64
+    restart: unless-stopped
+    environment:
+      DEBUG: 1
+      PUBLIC_TOKEN_TTL: 3600
+      GRANTS_TOKEN_TTL: 15
+      DATABASE_URL: postgres://root:toor@auth-api-db/auth
+    volumes:
+      - ../grants_decoding_key:/grants_decoding_key:ro
+      - ../grants_encoding_key:/grants_encoding_key:ro
+      - ../token_decoding_key:/token_decoding_key:ro
+      - ../token_encoding_key:/token_encoding_key:ro
+    networks:
+      - pokedex-gamba-net
+      - auth-api-db-net
+    depends_on:
+      - auth-api-db
+
+  auth-api-db:
+    image: ghcr.io/pokedex-gamba/auth-api-db
+    build: ../services/auth-api/database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: auth
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    volumes:
+      - auth-api-db-data:/var/lib/postgresql/data
+    networks:
+      - auth-api-db-net
+
+volumes:
+  auth-api-db-data:
+
+networks:
+  auth-api-db-net:

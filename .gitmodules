@@ -1,0 +1,3 @@
+[submodule "services/auth-api"]
+	path = services/auth-api
+	url = https://github.com/Pokedex-gamba/auth-api.git
