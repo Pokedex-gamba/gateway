@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  pokemon-api:
+    image: ghcr.io/pokedex-gamba/pokemon-api:latest-x86_64
+    restart: unless-stopped
+    environment:
+      DEBUG: 1
+      # FETCH_UNVERIFIED_DATA_FROM_API: 1
+      PREFETCH_DATA: 1
+    volumes:
+      # mount decoding key or set it in environment
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net

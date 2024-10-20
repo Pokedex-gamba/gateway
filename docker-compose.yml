@@ -2,6 +2,7 @@ version: '3.7'
 
 include:
   - compose-files/auth-api.yaml
+  - compose-files/pokemon-api.yaml
 
 services:
   gateway:
@@ -16,6 +17,7 @@ services:
       - pokedex-gamba-net
     depends_on:
       - auth-api
+      - pokemon-api
 
 networks:
   pokedex-gamba-net:
