@@ -5,5 +5,7 @@ services:
     image: nginx:1.27.2-alpine
     volumes:
       - ./server-configs/:/etc/nginx/conf.d/:ro
+      - ./auth-setup-server.conf:/etc/nginx/auth-setup-server.conf:ro
+      - ./auth-setup-http.conf:/etc/nginx/auth-setup-http.conf:ro
     ports:
       - "8081:80"
