@@ -35,14 +35,17 @@ Main compose file is `docker-compose.yaml`, other included files are located in 
 
 ### Encoding and decoding keys
 
-All mounts are setup to point to specific key names. If you followed chapter `Generate RSA keys`, then you can just run the commands bellow and keys will be linked correctly.
+All mounts are setup to point to specific key names. If you followed chapter `Generate RSA keys`, then your commands will look similar to the commands bellow.\
+Make sure the names of files to be linked and the link names are the same for keys to be linked correctly.
 
 ```sh
-# navigate to folder containing your keys
-ln -s ./grants_private_key.pem ./gateway/grants_encoding_key
-ln -s ./grants_public_key.pem ./gateway/grants_decoding_key
-ln -s ./public_token_private_key.pem ./gateway/token_encoding_key
-ln -s ./public_token_public_key.pem ./gateway/token_decoding_key
+# navigate from parent folder containing keys to folder containing this repo
+cd gateway
+# correctly link keys
+ln -s ../grants_private_key.pem ./grants_encoding_key
+ln -s ../grants_public_key.pem ./grants_decoding_key
+ln -s ../public_token_private_key.pem ./token_encoding_key
+ln -s ../public_token_public_key.pem ./token_decoding_key
 ```
 
 ### Finally start it
