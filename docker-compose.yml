@@ -3,6 +3,7 @@ version: '3.7'
 include:
   - compose-files/auth-api.yaml
   - compose-files/pokemon-api.yaml
+  - compose-files/inventory-api.yaml
 
 services:
   gateway:
@@ -19,6 +20,7 @@ services:
     depends_on:
       - auth-api
       - pokemon-api
+      - inventory-api
 
 networks:
   pokedex-gamba-net:
