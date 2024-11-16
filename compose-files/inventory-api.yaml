@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  inventory-api:
+    image: ghcr.io/pokedex-gamba/inventory-manager-api:latest
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://inventory-api-db:3306/pokemon_inventory_manager
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    volumes:
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net
+      - inventory-api-db-net
+    depends_on:
+      - inventory-api-db
+
+  inventory-api-db:
+    image: ghcr.io/pokedex-gamba/inventory-api-db
+    build: ../services/inventory-api/database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pokemon_inventory_manager
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - inventory-api-db-data:/var/lib/mysql-inventory
+    networks:
+      - inventory-api-db-net
+
+volumes:
+  inventory-api-db-data:
+
+networks:
+  inventory-api-db-net:
