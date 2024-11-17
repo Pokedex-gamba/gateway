@@ -4,3 +4,6 @@
 [submodule "services/inventory-api"]
 	path = services/inventory-api
 	url = https://github.com/Pokedex-gamba/inventory-manager-api.git
+[submodule "services/gamba-api"]
+	path = services/gamba-api
+	url = https://github.com/Pokedex-gamba/gamba-api.git

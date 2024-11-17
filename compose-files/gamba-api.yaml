@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  gamba-api:
+    image: ghcr.io/pokedex-gamba/gamba-api:latest
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://gamba-api-db:3306/pokemon_gamba
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - POKEMON_API_URL=http://pokemon-api:80
+      - INVENTORY_API_URL=http://inventory-api:80
+    volumes:
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net
+      - gamba-api-db-net
+    depends_on:
+      - gamba-api-db
+
+  gamba-api-db:
+    image: ghcr.io/pokedex-gamba/gamba-api-db
+    build: ../services/gamba-api/database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pokemon_gamba
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - gamba-api-db-data:/var/lib/mysql
+    networks:
+      - gamba-api-db-net
+
+volumes:
+  gamba-api-db-data:
+
+networks:
+  gamba-api-db-net:
