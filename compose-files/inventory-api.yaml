@@ -24,7 +24,7 @@ services:
       MYSQL_DATABASE: pokemon_inventory_manager
       MYSQL_ROOT_PASSWORD: password
     volumes:
-      - inventory-api-db-data:/var/lib/mysql-inventory
+      - inventory-api-db-data:/var/lib/mysql
     networks:
       - inventory-api-db-net
 
