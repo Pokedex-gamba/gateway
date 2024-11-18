@@ -5,6 +5,7 @@ include:
   - compose-files/pokemon-api.yaml
   - compose-files/gamba-api.yaml
   - compose-files/inventory-api.yaml
+  - compose-files/trading-api.yaml
 
 services:
   gateway:
@@ -23,6 +24,7 @@ services:
       - pokemon-api
       - gamba-api
       - inventory-api
+      - trading-api
 
 networks:
   pokedex-gamba-net:

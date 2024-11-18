@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  trading-api:
+    image: ghcr.io/pokedex-gamba/trading-api:latest
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://trading-api-db:3306/pokemon_trading
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - INVENTORY_API_URL=http://inventory-api:80
+    volumes:
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net
+      - trading-api-db-net
+    depends_on:
+      - trading-api-db
+
+  trading-api-db:
+    image: ghcr.io/pokedex-gamba/trading-api-db
+    build: ../services/trading-api/database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pokemon_trading
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - trading-api-db-data:/var/lib/mysql
+    networks:
+      - trading-api-db-net
+
+volumes:
+  trading-api-db-data:
+
+networks:
+  trading-api-db-net:
