@@ -87,6 +87,8 @@ Or you can go to `/SERVICE_NAME/docs`.
 
 Testing requests also works you just need to set `X-Host` header instead of `Host` header and token to public token you get from login.
 
+You can also get grants token by sending request to `/token/authorize` with `Authorization` header set to public token in bearer format.
+
 #### Disabling debug and docs endpoint
 
 If you want to disable debug and `/docs` endpoints, then go into `compose-files` and in each file look for `DEBUG` environmental variable and delete it (if it has one). After that you want to delete include for docs override in `server-configs/default-server.conf`.
