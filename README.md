@@ -65,7 +65,7 @@ These configs are located in `server-configs` folder.
 ### Authorization
 
 Any request to any service is authorized through public token, that you (most of the time) need to have.\
-Without public token you are just a guest user and have very limited access.\
+Without public token you are just a guest user and have very limited access.
 
 First you need to register or login to get your public token.\
 You then put this token into your `Authorization` header (in bearer format) and use this public token to make all your requests.
@@ -85,7 +85,7 @@ Some also enable `/docs` endpoint so don't forget to check it out!\
 If you want to access docs endpoints in your browser you need to either add server names in your hosts file or in your dns server.\
 Or you can go to `/SERVICE_NAME/docs`.
 
-`Test Request` sadly doesn't work when it's behind gateway, because these services expect grants token not public token. 
+Testing requests also works you just need to set `X-Host` header instead of `Host` header and token to public token you get from login.
 
 #### Disabling debug and docs endpoint
 
