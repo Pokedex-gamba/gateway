@@ -19,6 +19,7 @@ services:
       - "8081:80"
     networks:
       - pokedex-gamba-net
+      - pokedex-gamba-gateway-public-net
     depends_on:
       - auth-api
       - pokemon-api
@@ -28,3 +29,5 @@ services:
 
 networks:
   pokedex-gamba-net:
+  pokedex-gamba-gateway-public-net:
+    name: pokedex-gamba-gateway-public-net
