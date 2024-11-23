@@ -85,7 +85,10 @@ Some also enable `/docs` endpoint so don't forget to check it out!\
 If you want to access docs endpoints in your browser you need to either add server names in your hosts file or in your dns server.\
 Or you can go to `/SERVICE_NAME/docs`.
 
-Testing requests also works you just need to set `X-Host` header instead of `Host` header and token to public token you get from login.
+Testing requests also works just set token to public token you get from login.\
+It works by pulling service name from `Referer` header if it exists
+or you just can set `X-Host` header or `Host` header if it's allowed (in browsers it is not allowed).\
+`Host` and `X-Host` header will always override `Referer` header.
 
 You can also get grants token by sending request to `/token/authorize` with `Authorization` header set to public token in bearer format.
 
