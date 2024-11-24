@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  leaderboards-api:
+    image: ghcr.io/pokedex-gamba/leaderboards-api:latest
+    restart: unless-stopped
+    environment:
+      - INVENTORY_API_URL=http://inventory-api:80
+    volumes:
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net

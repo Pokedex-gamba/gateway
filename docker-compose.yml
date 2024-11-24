@@ -6,6 +6,7 @@ include:
   - compose-files/gamba-api.yaml
   - compose-files/inventory-api.yaml
   - compose-files/trading-api.yaml
+  - compose-files/leaderboards-api.yaml
 
 services:
   gateway:
