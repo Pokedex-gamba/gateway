@@ -7,6 +7,7 @@ include:
   - compose-files/inventory-api.yaml
   - compose-files/trading-api.yaml
   - compose-files/leaderboards-api.yaml
+  - compose-files/money-manager-api.yaml
 
 services:
   gateway:
@@ -25,6 +26,7 @@ services:
       - gamba-api
       - inventory-api
       - trading-api
+      - money-manager-api
 
 networks:
   pokedex-gamba-net:

@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  money-manager-api:
+    image: ghcr.io/pokedex-gamba/money-manager-api:latest
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://money-manager-api-db:3306/money_manager
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    volumes:
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net
+      - money-manager-api-db-net
+    depends_on:
+      - money-manager-api-db
+
+  money-manager-api-db:
+    image: ghcr.io/pokedex-gamba/money-manager-api-db
+    build: ../services/money-manager-api/database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: money_manager
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - money-manager-api-db-data:/var/lib/mysql
+    networks:
+      - money-manager-api-db-net
+
+volumes:
+  money-manager-api-db-data:
+
+networks:
+  money-manager-api-db-net:

@@ -10,3 +10,6 @@
 [submodule "services/trading-api"]
 	path = services/trading-api
 	url = https://github.com/Pokedex-gamba/trading-api.git
+[submodule "services/money-manager-api"]
+	path = services/money-manager-api
+	url = https://github.com/Pokedex-gamba/money-manager-api.git
