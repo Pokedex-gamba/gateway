@@ -10,6 +10,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=password
       - POKEMON_API_URL=http://pokemon-api:80
       - INVENTORY_API_URL=http://inventory-api:80
+      - MONEY_MANAGER_API_URL=http://money-manager-api:80
     volumes:
       - ../grants_decoding_key:/decoding_key:ro
     networks:
