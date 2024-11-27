@@ -6,19 +6,6 @@ Ties every service together.
 
 A lot of these steps are the same as in individual services.
 
-### Generate RSA keys
-
-You must generate RSA keys for grants and public token.
-
-```sh
-# grants keys
-openssl genrsa -out grants_private_key.pem 2048
-openssl rsa -pubout -in grants_private_key.pem -out grants_public_key.pem
-# public token keys
-openssl genrsa -out public_token_private_key.pem 2048
-openssl rsa -pubout -in public_token_private_key.pem -out public_token_public_key.pem
-```
-
 ### Download required files
 
 Clone the repo:
@@ -27,13 +14,36 @@ Clone the repo:
 git clone --recursive https://github.com/Pokedex-gamba/gateway.git
 ```
 
-### Edit compose files
+### Generate RSA keys
 
-Compose files are setup to just work so you don't really need to edit them.
+If you are not developing service, that is supposed to go under gateway you can just generate keys only for gateway and services currently under it.
 
-Main compose file is `docker-compose.yaml`, other included files are located in `compose-files` folder. If you decide to edit these files, then most of the comments and other config variables are removed. You can look for them in repos with similar names to figure out what you can edit.
+```bash
+# on linux
+make generate-keys-native
+# on any other os with docker
+make generate-keys-docker
+```
+
+If you are developing service, that is supposed to go under gateway you should use the same keys for your service and gateway.
+
+First you must generate RSA keys for grants and public token.
+
+```sh
+# keys are generated in parent folder:
+#   keys are at /some/path
+#   gateway is at /some/path/gateway
+# grants keys
+openssl genrsa -out grants_private_key.pem 2048
+openssl rsa -pubout -in grants_private_key.pem -out grants_public_key.pem
+# public token keys
+openssl genrsa -out public_token_private_key.pem 2048
+openssl rsa -pubout -in public_token_private_key.pem -out public_token_public_key.pem
+```
 
 ### Encoding and decoding keys
+
+If you used `make generate-keys-...` to generate your keys you can skip this chapter.
 
 All mounts are setup to point to specific key names. If you followed chapter `Generate RSA keys`, then your commands will look similar to the commands bellow.\
 Make sure the names of files to be linked and the link names are the same for keys to be linked correctly.
@@ -47,6 +57,13 @@ ln -s ../grants_public_key.pem ./grants_decoding_key
 ln -s ../public_token_private_key.pem ./token_encoding_key
 ln -s ../public_token_public_key.pem ./token_decoding_key
 ```
+
+### Edit compose files
+
+Compose files are setup to just work so you don't really need to edit them.
+
+Main compose file is `docker-compose.yaml`, other included files are located in `compose-files` folder. If you decide to edit these files, then most of the comments and other config variables are removed. You can look for them in repos with similar names to figure out what you can edit.
+
 
 ### Finally start it
 
