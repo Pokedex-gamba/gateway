@@ -28,3 +28,9 @@ update-containers:
 	docker compose build
 
 update-all: update-git update-containers
+
+generate-keys-docker:
+	docker container run --rm -v $$(pwd):/app -w /app --entrypoint sh alpine/openssl:3.3.2 generate_keys.sh
+
+generate-keys-native:
+	./generate_keys.sh
