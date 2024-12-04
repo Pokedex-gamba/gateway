@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  user-info-api:
+    image: ghcr.io/pokedex-gamba/user-info-api:latest
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://user-info-api-db:3306/user_info
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    volumes:
+      - ../grants_decoding_key:/decoding_key:ro
+    networks:
+      - pokedex-gamba-net
+      - user-info-api-db-net
+    depends_on:
+      - user-info-api-db
+
+  user-info-api-db:
+    image: ghcr.io/pokedex-gamba/user-info-api-db
+    build: ../services/user-info-api/database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: user_info
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - user-info-api-db-data:/var/lib/mysql
+    networks:
+      - user-info-api-db-net
+
+volumes:
+  user-info-api-db-data:
+
+networks:
+  user-info-api-db-net:

@@ -13,3 +13,6 @@
 [submodule "services/money-manager-api"]
 	path = services/money-manager-api
 	url = https://github.com/Pokedex-gamba/money-manager-api.git
+[submodule "services/user-info-api"]
+	path = services/user-info-api
+	url = https://github.com/Pokedex-gamba/user-info-api.git
