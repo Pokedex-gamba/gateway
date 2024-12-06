@@ -9,6 +9,7 @@ include:
   - compose-files/leaderboards-api.yaml
   - compose-files/money-manager-api.yaml
   - compose-files/user-info-api.yaml
+  - compose-files/scheduled-jobs.yaml
 
 services:
   gateway:

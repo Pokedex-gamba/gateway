@@ -16,3 +16,6 @@
 [submodule "services/user-info-api"]
 	path = services/user-info-api
 	url = https://github.com/Pokedex-gamba/user-info-api.git
+[submodule "services/scheduled-jobs"]
+	path = services/scheduled-jobs
+	url = https://github.com/Pokedex-gamba/scheduled-jobs.git

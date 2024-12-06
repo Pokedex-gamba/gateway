@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  scheduled-jobs:
+    image: ghcr.io/pokedex-gamba/scheduled-jobs
+    build: ../services/scheduled-jobs
+    restart: unless-stopped
+    networks:
+      - pokedex-gamba-net
+    depends_on:
+      - gateway
