@@ -10,6 +10,7 @@ include:
   - compose-files/money-manager-api.yaml
   - compose-files/user-info-api.yaml
   - compose-files/scheduled-jobs.yaml
+  - compose-files/payment-gateway-api.yaml
 
 services:
   gateway:
@@ -30,6 +31,7 @@ services:
       - trading-api
       - money-manager-api
       - user-info-api
+      - payment-gateway-api
 
 networks:
   pokedex-gamba-net:

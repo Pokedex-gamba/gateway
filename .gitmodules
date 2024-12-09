@@ -19,3 +19,6 @@
 [submodule "services/scheduled-jobs"]
 	path = services/scheduled-jobs
 	url = https://github.com/Pokedex-gamba/scheduled-jobs.git
+[submodule "services/payment-gateway-api"]
+	path = services/payment-gateway-api
+	url = https://github.com/Pokedex-gamba/payment-gateway-api.git
