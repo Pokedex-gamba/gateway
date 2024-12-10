@@ -8,6 +8,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://payment-gateway-api-db:3306/payment_history
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
+      - MONEY_MANAGER_API_URL=http://money-manager-api:80
     volumes:
       - ../grants_decoding_key:/decoding_key:ro
     networks:
